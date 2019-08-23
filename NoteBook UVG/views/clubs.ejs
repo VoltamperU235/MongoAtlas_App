@@ -1,0 +1,175 @@
+<%
+include partials/_header
+%>
+    <div class="container-fluid" style="margin-top: 5px;">
+        <div class="row">
+            <div class="col-auto">
+                <H2>Clubes UVG</H2>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-danger" id="reset_filter">Eliminar Filtro<i
+                    style="padding-right: 0px; font-size: 140%;" class="option fas fa-fire float-left"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid card_container">
+        <div class="row">
+            <% var colors = ['#ffee00b0','#00fdd3b0','#ffa600b0', '#46f800b0','#ff0000b0']; %>
+                <% var color_index = 0; %>
+                    <% for (let index = 0; index < clubs.length; index++) { %>
+                        <div class="card-col col-auto">
+                            <div class="card card_clubs" style="background-color:<%= colors[color_index] %>;">
+                                <div class="img-card-container rounded">
+                                    <div class="row">
+                                        <div class="col" style="padding: 0px;">
+                                        </div>
+                                        <div class="col-auto" style="padding: 0px;">
+                                            <img class=" card-img-top_clubs rounded " src="/uploads/<%= clubs[index].full_name.replace(/ /g, '_') %>" alt="image">
+                                        </div>
+                                        <div class="col" style="padding: 0px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title card-title_clubs rounded">
+                                        <%= clubs[index].full_name %>
+                                    </h5>
+                                    <div class="card-data">
+                                        Presidente:
+                                        <div class=" float-right">pendiente</div>
+                                        Miembros:
+                                        <div class=" float-right">pendiente</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% color_index++; %>
+                            <% color_index>4 ? color_index = 0 : color_index=color_index; %>
+                                <%}%>
+                                    <div class="col-auto card-col">
+                                        <div class="card card_clubs bg-dark text-dark" id="add_button">
+                                            <img class=" card-img-top_clubs_add " src="/db.png" alt="image">
+                                            <div class="card-body">
+                                                <h5 class="text-center rounded card-title card-title_clubs">Crear nuevo</h5>
+
+                                            </div>
+                                        </div>
+                                    </div>
+        </div>
+    </div>
+    <div class="container-fluid " id="add_one_club">
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col">
+                <div class="card bg-dark ">
+                    <div class="card-body">
+                        <h4 id="form_title">Formulario de Creacion de Club
+                        </h4>
+                        <br>
+                        <form id="form_post" action="/club/add" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row form-group">
+                                        <div class="col-3">
+                                            Nombre
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="text" name="full_name" id="form_group_name" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+
+                                        <div class="col">
+                                            <textarea class="form-control" name="description" id="" placeholder="Descripcion del Club"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <div class="custom-file">
+                                                <input id="my-input" class="custom-file-input" type="file" name="Imagen" onchange="ReadImage(this)" accept="image/*" required>
+                                                <label for="my-input" class="custom-file-label">Imagen</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col">
+
+                                            <div class="row">
+                                                <div class="col">
+
+                                                </div>
+                                                <div class="col-auto">
+                                                    <img id="image_for_club" class=" form_image" src="/busqueda.png" alt="image">
+
+                                                </div>
+                                                <div class="col">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col">
+                                            <button type="submit" id="submit_button" class="btn btn-block btn-success">Agregar a
+                                                la Base
+                                                de
+                                                Datos</button>
+
+
+                                        </div>
+                                        <div class="col" id="delete_user" style="display: none;">
+                                            <button class="btn btn-block btn-danger">Eliminar </button>
+
+                                        </div>
+                                        <div class="col">
+                                            <button id="exit" class="btn btn-block btn-secondary">Cancelar </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $("#add_button").click(() => {
+            if ($("#add_one_club").css("display") == "none") {
+                $("#add_one_club").show(400);
+            } else {
+                $("#add_one_club").hide(400);
+            }
+        });
+
+        $("#exit").click(() => {
+            event.preventDefault();
+            $("#add_one_club").hide(400);
+        });
+
+        function ReadImage(input) {
+            if (input.files && input.files[0]) {
+                console.log("imagen detectada");
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    console.log("imagen puesta");
+                    console.log(e.target.result)
+                    $("#image_for_club").attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+    <%
+include partials/_footer
+%>

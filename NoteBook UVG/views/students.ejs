@@ -1,0 +1,611 @@
+<%
+include partials/_header
+%>
+
+    <div class="container-fluid" style="margin-top: 5px;">
+        <div class="row">
+            <div class="col-auto">
+                <H2>Students</H2>
+
+            </div>
+            <div class="col-auto">
+
+                <button id="add_button" class="btn btn-primary">
+
+                <div class="row">
+                    <div class="col-auto" style="padding-right: 0px; font-size: 140%;">
+                        <i class="option fas fa-id-card float-right"></i>
+
+                    </div>
+                    <div class="col" style="padding-left: 0px;">
+                        Agregar
+
+                    </div>
+
+
+                </div>
+            </button>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <%= category %>
+                <i style="padding-right: 0px; font-size: 140%;" class="option fas fa-search float-left"></i>
+            </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+
+                    <%  for (let index = 0; index < clubes.length; index++) { %>
+                        <a class="dropdown-item" href="/search/student/club/<%=  clubes[index].full_name %> ">
+                            <%=  clubes[index].full_name %>
+                        </a>
+
+
+
+                        <% } %>
+
+
+                </div>
+
+                <button class="btn btn-danger" id="reset_filter">Eliminar Filtro<i
+                    style="padding-right: 0px; font-size: 140%;" class="option fas fa-fire float-left"></i></button>
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="container-fluid table_container">
+
+        <% var club = []; %>
+            <%          for (let index = 0; index < clubes.length; index++) {            %>
+                <% club.push(clubes[index].full_name.replace(/ /g, "_")); %>
+                    <% }%>
+
+                        <table id="general_table_students" clubes="<%= club %>" class="  table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Carnet</th>
+                                    <th>Nombre </th>
+                                    <th>Carrera</th>
+                                    <th>Telefono</th>
+                                    <th>Correo Electronico</th>
+                                    <th>Fecha de nacimiento</th>
+                                    <th>Edad</th>
+                                    <th>Sexo</th>
+                                    <th>StatusUVG</th>
+                                    <th>Clubes</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div>
+                                    <% for (let index = 0; index < students.length; index++) { %>
+
+                                        <tr club="<%= students[index].club %>" status='<%= students[index].status %>' sexo="<%= students[index].sexo %>" edad="<%= students[index].edad %>" correo_electronico="<%= students[index].correo_electronico %>" telefono="<%= students[index].telefono%>"
+                                            carrera='<%= students[index].carrera %>' full_name="<%= students[index].full_name %>" id="<%= students[index]._id %>" carnet="<%= students[index].carnet %>" onClick="edit(this)">
+                                            <td>
+                                                <%= index+1 %>
+                                            </td>
+                                            <td>
+                                                <%= students[index].carnet %>
+                                            </td>
+                                            <td>
+                                                <%= students[index].full_name %>
+                                            </td>
+                                            <td>
+                                                <%= students[index].carrera %>
+                                            </td>
+                                            <td>
+                                                <%= students[index].telefono%>
+                                            </td>
+                                            <td>
+                                                <%= students[index].correo_electronico %>
+                                            </td>
+                                            <td>
+                                                <%= students[index].fecha_nacimiento %>
+                                            </td>
+
+                                            <td>
+                                                <%= students[index].edad %>
+                                            </td>
+                                            <td>
+                                                <%= students[index].sexo %>
+                                            </td>
+                                            <td>
+                                                <%= students[index].status %>
+                                            </td>
+                                            <td>
+                                                <%= students[index].club %>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <% } %>
+                                </div>
+                            </tbody>
+
+                        </table>
+    </div>
+
+    <div class="container-fluid " id="add_one_user">
+        <div class="row">
+            <div class="col-1">
+
+            </div>
+            <div class="col">
+                <div class="card bg-dark ">
+                    <div class="card-body">
+                        <h4 id="form_title">Formulario de admisión Clubes UVG
+                        </h4>
+
+                        <form id="form_post" action="/student/add" method="POST">
+
+                            <div class="container-fluid" style="padding: 0px;">
+                                <div class="row form-group">
+                                    <div class="col-2">
+                                        Nombre *
+                                    </div>
+                                    <div class="col-4">
+
+                                        <input required="true" id="form_name" type="text" name="full_name" placeholder="Nombre" class="form-control">
+
+
+                                    </div>
+                                    <div class="col-2">
+                                        Carné *
+                                    </div>
+                                    <div class="col-4">
+
+                                        <input required="true" id="form_carnet" type="text" name="carnet" placeholder="# de carné" class="form-control">
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col-2">
+                                        Genero*
+
+                                    </div>
+                                    <div class="col-4">
+                                        <select required="true" id="form_sexo" name="sexo" class="form-control">
+
+                                        <option>FEMENINO</option>
+                                        <option>MASCULINO</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-2">
+                                        Edad *
+                                    </div>
+                                    <div class="col-4">
+
+                                        <input required="true" id="form_edad" type="number" name="edad" placeholder="Edad" class="form-control">
+
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="row form-group">
+                                    <div class="col-2">
+                                        Carrera
+
+                                    </div>
+                                    <div class="col-4">
+                                        <input id="form_carrera" type="text" name="carrera" placeholder="carrera" class="form-control">
+
+                                    </div>
+                                    <div class="col-2">
+
+                                        Teléfono*
+
+                                    </div>
+                                    <div class="col-4">
+                                        <input required="true" id="form_telefono" id="telefono" type="number" name="telefono" placeholder="# de teléfono" class="form-control">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col-2">
+                                        Email *
+
+                                    </div>
+                                    <div class="col-4">
+                                        <input required="true" id="form_correo_electronico" type="text" name="correo_electronico" placeholder="Correo electrónico" class="form-control">
+
+                                    </div>
+                                    <div class="col-2 ">
+                                        Status UVG
+
+
+
+
+                                    </div>
+                                    <div class="col-4 ">
+                                        <select id="form_status" name="status" class="form-control">
+                    <option>ESTUDIANTE</option>
+                    <option>EMPLEADO</option>
+                    <option>INSTRUCTOR</option>
+                    <option>AUXILIAR</option>
+                    <option>OTRO</option>
+                </select>
+                                    </div>
+                                </div>
+                                <div class="row mega-row form-group">
+                                    <div class="col col_container_data">
+
+                                        <div class="row form-group" style="padding-left: 0px; padding-right: 0px;">
+                                            <div class="col-4">
+                                                Fecha de Nacimiento
+
+                                            </div>
+                                            <div class="col-8">
+                                                <input id="form_fecha_nacimiento" type="date" name="fecha_nacimiento" placeholder="carrera" class="form-control">
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col col_container_data">
+                                        <div class="row rounded" style="background-color: #145e0dab;     padding-left: 15px;
+                                        padding-right: 15px;">
+                                            <div>Clubs y Talleres</div>
+
+
+                                            <div class="col-12" id="menu_clubes">
+
+                                                <%  for (let index = 0; index < clubes.length; index++) { %>
+                                                    <div class="container-fluid rounded" style=" background-color:#1d1818b0; margin-bottom: 5px; margin-top: 5px;">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div style="margin-left: 10px; margin-top: 6px;">
+                                                                    <%=  clubes[index].full_name %>
+
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col">
+                                                                <input type="checkbox" value="<%= clubes[index].full_name %>" id="form_club_<%=clubes[index].full_name.replace(/ /g, '_') %>" name="club" class=" check_in radio  form-control ">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                                        <div class="container-fluid rounded" id="noclub" style=" display:none; background-color:#1d1818b0; margin-bottom: 5px; margin-top: 5px;">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div style="margin-left: 10px; margin-top: 6px;">
+                                                                        No hay Clubes disponibles
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+
+                                <div id="taller_needed_data" class="row form-group" style="display: none;">
+                                    <div class="col-2">
+                                        Nombre Encargado*
+
+                                    </div>
+                                    <div class="col-4">
+                                        <input required="true" disabled="true" id="form_nombre_encargado" type="text" name="nombre_encargado" placeholder="Encargado" class="form-control">
+
+                                    </div>
+                                    <div class="col-2">
+                                        Telefono Encargado*
+
+
+
+                                    </div>
+                                    <div class="col-4">
+                                        <input required="true" disabled="true" id="form_telefono_encargado" type="number" name="telefono_encargado" placeholder="Telefono" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col">
+                                        <button type="submit" id="submit_button" class="btn btn-block btn-success">Agregar a
+                                        la Base
+                                        de
+                                        Datos</button>
+
+
+                                    </div>
+                                    <div class="col" id="delete_user" style="display: none;">
+                                        <button class="btn btn-block btn-danger">Eliminar </button>
+
+                                    </div>
+                                    <div class="col" id="storage_user" style="display: none;">
+                                        <button class="btn btn-block btn-warning">Archivar </button>
+
+                                    </div>
+                                    <div class="col">
+                                        <button id="exit" class="btn btn-block btn-secondary">Cancelar </button>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-1">
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $('#reset_filter').
+        <%=  extra_button ? "show();" : "hide();" %>
+
+
+        $('#noclub')
+        <%= clubes.length == 0 ? ".show()" : ".hide();" %>
+
+
+        $("#add_button").click(() => {
+            $("#form_post").attr("update", false);
+            $("#form_post").attr("action", "/student/add");
+            $(".check_in").attr("checked", false);
+            $("#form_title").text("Formulario de admisión Clubes UVG");
+            $("#delete_user").hide();
+            $("#storage_user").hide();
+            $("#submit_button").text("Agregar a la base de datos");
+            $("#form_fecha_nacimiento").val("");
+            $("#form_carrera").val("");
+            $("#form_correo_electronico").val("");
+            $("#form_status").val("OTRO");
+            $("#form_sexo").val("FEMENINO");
+            $("#form_name").val("");
+            $("#form_carnet").val("");
+            $("#form_edad").val("");
+            $("#form_telefono").val("");
+
+
+
+
+            if ($("#add_one_user").css("display") == "none") {
+                $("#add_one_user").show(400);
+            } else {
+                $("#add_one_user").hide(400);
+            }
+        })
+        $("#exit").click(() => {
+            event.preventDefault();
+            $("#add_one_user").hide(400);
+        })
+
+
+        $("#form_post").submit(async function(e) {
+            e.preventDefault();
+
+            var update = $(this).attr("update");
+            console.log(update);
+
+
+            if (update == "true") {
+                var output = await confirm_update();
+                if (!output) {
+                    return false;
+                }
+            }
+
+
+
+            var form_data = $(this).serialize();
+            var form_url = $(this).attr("action");
+            var form_method = $(this).attr("method").toUpperCase();
+            var send = true;
+
+            $.ajax({
+                url: form_url,
+                type: form_method,
+                data: form_data,
+                success: function(returnhtml) {
+                    returnhtml ? add_user() : alert_form_server();
+                }
+            });
+        });
+
+
+
+
+        $("#delete_user").click(async(data) => {
+            event.preventDefault();
+            if (await confirm_delete()) {
+                await $.get("/student/delete/" + $("#form_post").attr("delete"));
+                await Swal.fire(
+                    'Eliminado!',
+                    'Los cambios se realizaron correctamente',
+                    'success'
+                );
+                window.location.reload();
+            }
+        });
+
+        async function confirm_delete() {
+            do {
+                var result = await Swal.fire({
+                    title: 'Estas Seguro?',
+                    text: "Se perderan datos de manera permanente!\n Para confirmar ingresa CONFIRMAR",
+                    type: 'warning',
+                    input: 'text',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                })
+                if (result.value == "CONFIRMAR") {
+                    return true;
+                } else if ((result.value != "CONFIRMAR") && (result.dismiss != "cancel")) {
+                    await Swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Ingresa CONFIRMAR para continuar',
+                    })
+                } else if (result.dismiss == "cancel") {
+                    return false;
+                }
+
+            }
+            while ((result.value != "CONFIRMAR") && (result.dismiss != "cancel"))
+        }
+
+        async function confirm_update() {
+            do {
+                var result = await Swal.fire({
+                    title: 'Estas Seguro?',
+                    text: "Se podrían datos de manera permanente!\n Para confirmar ingresa ACTUALIZAR",
+                    type: 'warning',
+                    input: 'text',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Actualizar'
+                })
+                if (result.value == "ACTUALIZAR") {
+                    return true;
+                } else if ((result.value != "ACTUALIZAR") && (result.dismiss != "cancel")) {
+                    await Swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Ingresa CONFIRMAR para continuar',
+                    })
+                } else if (result.dismiss == "cancel") {
+                    return false;
+                }
+
+            }
+            while ((result.value != "ACTUALIZAR") && (result.dismiss != "cancel"))
+        }
+
+        $('#reset_filter').click(() => {
+            window.location.replace("/students");
+        });
+
+        function edit(row) {
+
+            console.log(row);
+            $("#form_post").attr("update", true);
+            var id = $(row).attr("id");
+            $(".check_in").attr("checked", false);
+            $("#form_post").attr("action", "/student/add/" + id);
+            $("#form_post").attr("delete", id);
+            $("#submit_button").text("Actualizar Datos");
+            $("#form_title").text("Actualizacion datos de " + ($(row).attr("full_name") != "" ? $(row).attr("full_name") : "..."));
+            $("#form_carrera").val($(row).attr("carrera") != "" ? $(row).attr("carrera") : "");
+            $("#form_correo_electronico").val($(row).attr("correo_electronico") != "" ? $(row).attr("correo_electronico") : "");
+            $("#form_status").val($(row).attr("status") != "" ? $(row).attr("status") : "OTRO");
+            $("#form_sexo").val($(row).attr("sexo") != "" ? $(row).attr("sexo") : "FEMENINO");
+            $("#form_name").val($(row).attr("full_name") != "" ? $(row).attr("full_name") : "...");
+            $("#form_carnet").val($(row).attr("carnet") != "" ? $(row).attr("carnet") : "");
+            $("#form_edad").val($(row).attr("edad") != "" ? $(row).attr("edad") : "");
+            $("#form_telefono").val($(row).attr("telefono") != "" ? $(row).attr("telefono") : "");
+            $("#form_fecha_nacimiento").val($(row).attr("fecha_nacimiento") != "" ? $(row).attr("fecha_nacimiento") : "");
+            $("#delete_user").show();
+            $("#storage_user").show();
+            $("#add_one_user").show(400);
+
+            var clubs;
+            clubs = $(row).attr("club");
+            clubs = clubs.split(",");
+            console.log(typeof(clubs));
+
+            for (let index = 0; index < clubs.length; index++) {
+                var data = clubs[index].replace(/ /g, "_");
+                var celda = "#form_club_" + data;
+                $(celda).attr("checked", true);
+            }
+
+
+
+        }
+
+        function alert_form_server() {
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Resiva la consistencia de los datos ingresados',
+            })
+        }
+
+        function alert_form_client() {
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Ingresa los campos obligatorios',
+            })
+        }
+
+        async function add_user() {
+            await Swal.fire({
+                type: 'success',
+                title: 'Exito!',
+                text: 'Cambios realizados correctamente!',
+            })
+
+            window.location.reload();
+
+
+
+        }
+
+        function formChange(option) {
+            var id = $(option).attr("id");
+            console.log(id);
+            var option = $("#" + id).find(":selected").text();
+
+            if (option == "CLUB") {
+                $("#form_nombre_encargado").attr("disabled");
+                $("#form_telefono_encargado").attr("disabled");
+                $("#taller_needed_data").hide(200);
+
+
+
+            } else if (option == "TALLER") {
+                $("#form_nombre_encargado").removeAttr("disabled");
+                $("#form_telefono_encargado").removeAttr("disabled");
+                $("#taller_needed_data").show(200);
+
+
+            }
+            console.log(option);
+        }
+    </script>
+
+
+
+    <%
+include partials/_footer
+%>

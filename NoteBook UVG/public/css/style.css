@@ -1,0 +1,244 @@
+.option_item:hover {
+    background-color: #0e5a12;
+    border-color: #ffffff;
+    border-width: 2px;
+}
+
+
+/* The side navigation menu */
+
+.sidenav {
+    /* 100% Full-height */
+    display: none;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    width: 250px;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
+    top: 20%;
+    /* Stay at the top */
+    left: 0;
+    background-color: #111;
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+}
+
+
+/* The navigation menu links */
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+}
+
+
+/* When you mouse over the navigation links, change their color */
+
+.sidenav a:hover {
+    color: #ffffff;
+}
+
+
+/* Position and style the close button (top right corner) */
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    font-size: 36px;
+}
+
+.closebtn {
+    background: rgb(8, 26, 0);
+    width: 100%;
+}
+
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+@font-face {
+    font-family: Tittle;
+    src: url(University.otf);
+}
+
+.header {
+    font-size: 150%;
+    font-family: Tittle;
+    background: rgb(0, 148, 37);
+    height: 50px;
+    margin-bottom: 13px;
+}
+
+h2 {
+    font-size: 115%;
+    font-family: Tittle;
+    color: black;
+    margin: 10px;
+}
+
+#mySidenav {
+    background: #153607;
+    color: #ffffff;
+}
+
+#menu {
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.option {
+    margin-right: 25px;
+}
+
+.table_container {
+    margin-top: 10px;
+    overflow: auto;
+    height: 80vh;
+    border: #000000;
+}
+
+.card_container {
+    overflow: auto;
+    height: 80vh;
+}
+
+#add_one_user {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    border: #000000;
+    top: 10vh;
+    color: floralwhite;
+    margin-bottom: 15px;
+}
+
+#add_one_club {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    border: #000000;
+    top: 10vh;
+    color: floralwhite;
+}
+
+td:hover {
+    cursor: pointer;
+    background-color: #00000013;
+}
+
+th:hover {
+    cursor: default;
+}
+
+td {
+    font-size: 80%;
+}
+
+#menu_clubes {
+    overflow: auto;
+    height: 100px;
+    padding: 0px;
+}
+
+#menu:hover {
+    cursor: pointer;
+}
+
+#reset_filter {
+    display: none;
+}
+
+.card_clubs {
+    width: 250px;
+    cursor: pointer;
+    margin: 15px;
+    border-color: #000000;
+    border-width: 3px;
+}
+
+.card_clubs:hover {
+    background-color: #000000e0 !important;
+    border-color: #a1a0a0;
+}
+
+.card_clubs:hover .card-data {
+    color: #ffffff;
+}
+
+.card-data {
+    color: black;
+}
+
+.card-img-top_clubs {
+    max-height: 150px;
+    max-width: 225px;
+    margin-top: 5px;
+}
+
+.card-img-top_clubs_add {
+    max-height: 150px;
+    max-width: 225px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.card-title_clubs {
+    font-family: Tittle;
+    font-size: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: floralwhite;
+    border-color: #000000;
+    border-width: 20px;
+}
+
+.card-col {
+    padding: 0px;
+}
+
+.form_image {
+    max-height: 150px;
+    max-width: 225px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+.clubs-container {
+    margin-left: 90%;
+    margin-right: 90%;
+}
+
+.img-card-container {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    height: 160px;
+    background-color: #645e5eb0;
+}
+
+.col_container_data {}

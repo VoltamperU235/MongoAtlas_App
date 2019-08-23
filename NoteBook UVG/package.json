@@ -1,0 +1,17 @@
+{
+  "name": "NoteBook",
+  "version": "1.0.0",
+  "description": "Sistema de logística para los clubes de UVG",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/app.js"
+  },
+  "author": "Dennis Andres Revolorio Yocute",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "multer": "^1.4.2"
+  }
+}

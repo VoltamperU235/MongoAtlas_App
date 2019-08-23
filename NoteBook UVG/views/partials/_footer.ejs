@@ -1,0 +1,19 @@
+</body>
+
+</html>
+
+<script>
+    
+    $("#menu").click(() => {
+            console.log("touch")
+            if ($("#mySidenav").css("display") == "none") {
+                console.log("visible")
+                $("#mySidenav").show(500);
+            } else {
+                $("#mySidenav").hide(500);
+            }
+        })
+        $("#menu_out").click(() => {
+            $("#mySidenav").hide(500);
+        })
+</script>
